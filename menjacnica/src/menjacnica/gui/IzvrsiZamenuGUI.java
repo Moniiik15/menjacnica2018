@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
 import menjacnica.Valuta;
+import menjacnica.gui.kontroler.GUIKontroler;
+
 import java.awt.Toolkit;
 
 public class IzvrsiZamenuGUI extends JFrame {
@@ -50,13 +52,13 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private JLabel lblKonacniIznos;
 	private JTextField textFieldKonacniIznos;
 
-	private MenjacnicaGUI glavniProzor;
+	
 	private Valuta valuta;
 
 	/**
 	 * Create the frame.
 	 */
-	public IzvrsiZamenuGUI(MenjacnicaGUI glavniProzor, Valuta valuta) {
+	public IzvrsiZamenuGUI(Valuta valuta) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IzvrsiZamenuGUI.class.getResource("/icons/Screenshot.png")));
 		setTitle("Izvrsi zamenu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,10 +84,8 @@ public class IzvrsiZamenuGUI extends JFrame {
 		contentPane.add(getLblKonacniIznos());
 		contentPane.add(getTextFieldKonacniIznos());
 		
-		//podesavanje
-		this.glavniProzor = glavniProzor;
-		this.valuta = valuta;
-				
+		
+		this.valuta=valuta;
 		prikaziValutu();
 	}
 	private JLabel getLblKupovni() {
@@ -242,7 +242,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private void izvrsiZamenu(){
 		try{
 			double konacniIznos = 
-					glavniProzor.sistem.izvrsiTransakciju(valuta,
+					GUIKontroler.menjacnica.izvrsiTransakciju(valuta,
 							rdbtnProdaja.isSelected(), 
 							Double.parseDouble(textFieldIznos.getText()));
 		
